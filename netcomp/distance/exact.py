@@ -85,9 +85,9 @@ def vertex_edge_overlap(A1,A2):
 
     """
     try:
-        [G1,G2] = [nx.from_scipy_sparse_matrix(A) for A in [A1,A2]]
+        [G1,G2] = [nx.from_scipy_sparse_array(A) for A in [A1,A2]]
     except AttributeError:
-        [G1,G2] = [nx.from_numpy_matrix(A) for A in [A1,A2]]
+        [G1,G2] = [nx.from_numpy_array(A) for A in [A1,A2]]
     V1,V2 = [set(G.nodes()) for G in [G1,G2]]
     E1,E2 = [set(G.edges()) for G in [G1,G2]]
     V_overlap = len(V1|V2) # set union
