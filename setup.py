@@ -11,10 +11,10 @@ setup(name='NetComp',
           'netcomp.linalg',
           'netcomp.distance'
       ],
-      url='https://github.com/peterewills/NetComp',
+      url='https://github.com/barneydobson/NetComp',
       install_requires=[
           'numpy>=1.11.3',
           'scipy>=0.18',
-          'networkx<2'
+          'networkx'
       ]
      )
