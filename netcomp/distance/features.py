@@ -44,7 +44,7 @@ def get_features(A):
         G = nx.from_numpy_array(A)
     n = len(G)
     # degrees, array so we can slice nice
-    d_vec = np.array(list(G.degree().values()))
+    d_vec = np.array(list(dict(G.degree()).values()))
     # list of clustering coefficient
     clust_vec = np.array(list(nx.clustering(G).values()))
     neighbors = [G.neighbors(i) for i in range(n)]
