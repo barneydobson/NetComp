@@ -165,16 +165,23 @@ def renormalized_res_mat(A,beta=1):
         G = nx.from_scipy_sparse_array(A)        
     else:
         G = nx.from_numpy_array(A)
+        
+    if isinstance(G,nx.graph):
+        cc = nx.connected_components
+    else:
+        cc = nx.weakly_connected_components
+        
     n = len(G)
     subgraphR = []
-    for subgraph in nx.connected_component_subgraphs(G):
+    for c in cc(G):
+        subgraph = G.subgraph(c).copy()
         a_sub = nx.adjacency_matrix(subgraph)
         r_sub = resistance_matrix(a_sub)
         subgraphR.append(r_sub)
     R = spla.block_diag(*subgraphR)
     # now, resort R so that it matches the original node list
     component_order = []
-    for component in nx.connected_components(G):
+    for component in cc(G):
         component_order += list(component)
     component_order = list(np.argsort(component_order))
     R = R[component_order,:]
@@ -223,8 +230,13 @@ def conductance_matrix(A):
         G = nx.from_scipy_sparse_array(A)        
     else:
         G = nx.from_numpy_array(A)
+    if isinstance(G,nx.graph):
+        cc = nx.connected_components
+    else:
+        cc = nx.weakly_connected_components
     subgraphC = []
-    for subgraph in nx.connected_component_subgraphs(G):
+    for c in cc(G):
+        subgraph = G.subgraph(c).copy()
         a_sub = nx.adjacency_matrix(subgraph)
         r_sub = resistance_matrix(a_sub)
         m = len(subgraph)
@@ -234,7 +246,7 @@ def conductance_matrix(A):
     C = spla.block_diag(*subgraphC)
     # resort C so that it matches the original node list
     component_order = []
-    for component in nx.connected_components(G):
+    for component in cc(G):
         component_order += list(component)
     component_order = list(np.argsort(component_order))
     C = C[component_order,:]
