@@ -162,9 +162,9 @@ def renormalized_res_mat(A,beta=1):
 
     """
     if issparse(A):
-        G = nx.from_scipy_sparse_matrix(A)        
+        G = nx.from_scipy_sparse_array(A)        
     else:
-        G = nx.from_numpy_matrix(A)
+        G = nx.from_numpy_array(A)
     n = len(G)
     subgraphR = []
     for subgraph in nx.connected_component_subgraphs(G):
@@ -220,9 +220,9 @@ def conductance_matrix(A):
 
     """
     if issparse(A):
-        G = nx.from_scipy_sparse_matrix(A)        
+        G = nx.from_scipy_sparse_array(A)        
     else:
-        G = nx.from_numpy_matrix(A)
+        G = nx.from_numpy_array(A)
     subgraphC = []
     for subgraph in nx.connected_component_subgraphs(G):
         a_sub = nx.adjacency_matrix(subgraph)
