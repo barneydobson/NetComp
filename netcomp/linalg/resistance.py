@@ -63,9 +63,9 @@ def resistance_matrix(A,check_connected=True):
     # check if graph is connected
     if check_connected:
         if issparse(A):
-            G = nx.from_scipy_sparse_matrix(A)
+            G = nx.from_scipy_sparse_array(A)
         else:
-            G = nx.from_numpy_matrix(A)
+            G = nx.from_numpy_array(A)
         if not nx.is_connected(G):
             raise UndefinedException('Graph is not connected. '
                                      'Resistance matrix is undefined.')
