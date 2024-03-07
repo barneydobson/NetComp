@@ -166,7 +166,7 @@ def renormalized_res_mat(A,beta=1):
     else:
         G = nx.from_numpy_array(A)
         
-    if isinstance(G,nx.graph):
+    if isinstance(G,nx.Graph):
         cc = nx.connected_components
     else:
         cc = nx.weakly_connected_components
@@ -230,7 +230,7 @@ def conductance_matrix(A):
         G = nx.from_scipy_sparse_array(A)        
     else:
         G = nx.from_numpy_array(A)
-    if isinstance(G,nx.graph):
+    if isinstance(G,nx.Graph):
         cc = nx.connected_components
     else:
         cc = nx.weakly_connected_components
